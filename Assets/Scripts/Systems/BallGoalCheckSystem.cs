@@ -29,6 +29,20 @@ public class BallGoalCheckSystem : JobComponentSystem
 					GameManager.main.PlayerScored(1);
 					ecb.DestroyEntity(entity);
 				}
+
+				/*
+				
+				if ( pos.x >= Mathf.Abs(bound) )
+				{
+					GameManager.main.PlayerScored(0);
+					ecb.DestroyEntity(entity);
+				}
+
+
+
+				*/
+
+
 			}).Run();
 
 		ecb.Playback(EntityManager);

@@ -15,9 +15,22 @@ public class PlayerInputSystem : JobComponentSystem
         Entities.ForEach((ref PaddleMovementData moveData, in PaddleInputData inputData) => // ref: Writing to this data // in: Reading from this data 
         {
 			moveData.direction = 0;
+			
+			if ( Input.GetKey(inputData.upKey) )
+			{
+				moveData.direction += 1;
+			}
+			else if ( Input.GetKey(inputData.downKey) )
+			{
+				moveData.direction -= 1;
+			}
+			/*
 			moveData.direction += Input.GetKey(inputData.upKey) ? 1 : 0; // ?, means am I pressing 'upKey', if I am add value of '1', else add value of '0'
             moveData.direction -= Input.GetKey(inputData.downKey) ? 1 : 0; // ?, means am I pressing 'upKey', if I am add value of '1', else add value of '0'
-        }).Run(); // Run on main thread
+			*/
+
+
+		}).Run(); // Run on main thread
 
         return default; // Method 3
         // return new JobHandle(); // Method 1

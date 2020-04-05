@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 	public float xBound = 3f;
 	public float yBound = 3f;
 	public float ballSpeed = 3f;
-	public float respawnDelay = 2f;
+	//public float respawnDelay = 2f;
 	public int[] playerScores; // Set as an array in-case we want to add more players, could just be set to 2.
 
     public Text mainText;
@@ -28,11 +28,13 @@ public class GameManager : MonoBehaviour
 
 	private void Awake()
 	{
+		/*
 		if (main != null && main != this) // If there's another game manager open, close this.
         {
 			Destroy(gameObject);
 			return;
 		}
+		*/
 
         // If no other game manager is open, make this the main game manager.
         main = this;
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
 		ballEntityPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(ballPrefab, settings);
 
 		oneSecond = new WaitForSeconds(1f);
-		delay = new WaitForSeconds(respawnDelay);
+		delay = new WaitForSeconds(2f);
 
 		StartCoroutine(CountdownAndSpawnBall());
 	}
@@ -52,8 +54,14 @@ public class GameManager : MonoBehaviour
 	public void PlayerScored(int playerID)
 	{
 		playerScores[playerID]++; // Update player score(s)
-        for (int i = 0; i < playerScores.Length && i < playerTexts.Length; i++) // Updates UI
+
+		playerTexts[playerID].text = playerScores[playerID].ToString(); //Updates UI
+		/*
+
+		for (int i = 0; i < playerScores.Length && i < playerTexts.Length; i++) // Updates UI
             playerTexts[i].text = playerScores[i].ToString();
+		 */
+
 
 		StartCoroutine(CountdownAndSpawnBall());
 	}
